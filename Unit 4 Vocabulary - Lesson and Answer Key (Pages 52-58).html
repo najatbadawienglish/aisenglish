@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 4 Vocabulary Lesson</title>
+<style>
+  :root{
+    --pink:#ff4f8b; --orange:#ff9f1c; --yellow:#ffd23f; --green:#2ec4b6;
+    --blue:#3a86ff; --purple:#8338ec; --red:#ef476f; --navy:#1d2b53;
+    --ink:#1d2b53; --card:#ffffff; --ok:#119c6b;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:"Segoe UI","Trebuchet MS",Arial,sans-serif; color:var(--ink);
+    background:#fff8ec;
+    background-image:radial-gradient(circle at 10% 10%,#ffe3f0 0 120px,transparent 121px),
+                     radial-gradient(circle at 90% 30%,#e0f4ff 0 160px,transparent 161px),
+                     radial-gradient(circle at 20% 80%,#e6fff5 0 140px,transparent 141px);
+    background-attachment:fixed; line-height:1.55; font-size:18px; overflow-x:hidden;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:16px}
+  h1,h2,h3{margin:.2em 0 .4em;line-height:1.2}
+  h2{font-size:1.7rem}
+  .muted{color:#5d6788}
+  /* hero */
+  .hero{background:linear-gradient(135deg,var(--purple),var(--blue) 45%,var(--green));
+    color:#fff;border-radius:28px;padding:34px 24px;text-align:center;
+    box-shadow:0 10px 0 rgba(0,0,0,.08);margin-top:12px;position:relative;overflow:hidden}
+  .hero .badge{display:inline-block;background:var(--yellow);color:var(--navy);font-weight:800;
+    padding:6px 18px;border-radius:999px;font-size:1rem;letter-spacing:1px}
+  .hero h1{font-size:clamp(1.9rem,5.5vw,3rem);margin-top:12px}
+  .hero p{font-size:1.15rem;margin:0}
+  .bubbles span{position:absolute;border-radius:50%;opacity:.22;background:#fff}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:18px}
+  .chips span{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.45);padding:3px 11px;border-radius:999px;font-weight:700;font-size:.92rem}
+  /* nav */
+  nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0;position:sticky;top:0;z-index:20;padding:8px 0;background:#fff8ecee;backdrop-filter:blur(4px)}
+  nav a{text-decoration:none;color:#fff;font-weight:700;padding:8px 14px;border-radius:999px;font-size:.92rem}
+  nav a:nth-child(1){background:var(--pink)} nav a:nth-child(2){background:var(--orange)}
+  nav a:nth-child(3){background:var(--green)} nav a:nth-child(4){background:var(--blue)}
+  nav a:nth-child(5){background:var(--purple)} nav a:nth-child(6){background:var(--red)}
+  nav a:nth-child(7){background:#119c6b} nav a:nth-child(8){background:var(--navy)}
+  section{background:var(--card);border-radius:24px;padding:24px;margin:22px 0;
+    box-shadow:0 8px 0 rgba(29,43,83,.07);border-top:10px solid var(--c,var(--blue));scroll-margin-top:70px}
+  .shead{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px}
+  .shead h2{display:flex;align-items:center;gap:10px}
+  .pg{font-size:.8rem;background:#eef1fa;color:#5d6788;border-radius:999px;padding:3px 10px;font-weight:700}
+  .instr{background:#fafbff;border-left:6px solid var(--c,var(--blue));border-radius:12px;padding:10px 14px;font-style:italic;margin:6px 0 16px}
+  /* progress board */
+  .board{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px}
+  .tile-s{background:#fafbff;border-radius:16px;padding:10px 12px;border:2px solid #e6eaf5}
+  .tile-s b{display:block;font-size:.85rem;color:#5d6788}
+  .tile-s .n{font-size:1.4rem;font-weight:900}
+  .bar{height:8px;background:#e9ecf6;border-radius:99px;overflow:hidden;margin-top:6px}
+  .bar div{height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--orange),var(--yellow),var(--green));transition:width .4s}
+  /* word cards */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .filters button{background:#eef1fa;color:var(--ink);box-shadow:none;padding:7px 14px;font-size:.92rem}
+  .filters button.on{background:var(--navy);color:#fff}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+  .card{perspective:900px;height:330px;cursor:pointer}
+  .inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+  .card.flip .inner{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:16px;display:flex;flex-direction:column}
+  .front{background:var(--c);color:#fff;align-items:center;justify-content:center;text-align:center}
+  .front .no{position:absolute;top:10px;left:14px;font-weight:900;opacity:.75}
+  .front .emo{font-size:2.6rem}
+  .front .w{font-size:1.75rem;font-weight:900;margin-top:4px}
+  .front .pr{opacity:.9;font-size:1rem}
+  .pos{display:inline-block;background:rgba(255,255,255,.25);border-radius:999px;padding:2px 10px;font-size:.8rem;font-weight:800;margin-top:8px}
+  .front .tap{position:absolute;bottom:10px;font-size:.75rem;opacity:.85}
+  .say{display:inline-block;background:#fff;color:var(--c);font-weight:900;letter-spacing:.5px;border-radius:10px;padding:3px 10px;margin-top:6px;font-size:1.05rem}
+  .spk{background:rgba(255,255,255,.95);color:var(--navy);box-shadow:0 3px 0 rgba(0,0,0,.18);padding:5px 12px;font-size:.9rem;border-radius:999px;margin-top:8px}
+  .spk.on{background:var(--yellow)}
+  .back .spk{background:var(--c);color:#fff;margin:0;align-self:flex-start;padding:3px 10px;font-size:.8rem}
+  .saylist{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:10px}
+  .saylist div{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#fafbff;border:2px solid #e6eaf5;border-radius:12px;padding:6px 10px}
+  .saylist b{color:var(--navy)} .saylist span{color:var(--purple);font-weight:800;font-size:.9rem}
+  .saylist button{padding:4px 10px;font-size:.85rem;background:var(--pink)}
+  .back{background:#fff;border:4px solid var(--c);transform:rotateY(180deg);font-size:.88rem;overflow:auto;gap:6px}
+  .back h4{margin:0;color:var(--c);font-size:1.15rem}
+  .back .easy{background:#fffbe6;border-radius:10px;padding:6px 8px;font-weight:600}
+  .back .book{color:#5d6788;font-size:.8rem}
+  .sa{font-size:.8rem}
+  .sa .s{color:var(--ok);font-weight:800} .sa .a{color:var(--red);font-weight:800}
+  /* exercises */
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px;align-items:center}
+  button{font-family:inherit;font-size:1rem;font-weight:700;border:0;border-radius:14px;
+    padding:10px 18px;cursor:pointer;color:#fff;background:var(--blue);
+    box-shadow:0 4px 0 rgba(0,0,0,.18);transition:transform .1s}
+  button:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.18)}
+  .b-check{background:var(--green)} .b-show{background:var(--orange)} .b-reset{background:#9aa3b8}
+  .result{font-weight:800;font-size:1.1rem;margin-left:auto}
+  .items{display:grid;gap:10px;counter-reset:q}
+  .item{display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:start;background:#fafbff;border:2px solid #e6eaf5;border-radius:16px;padding:12px 14px;transition:border-color .2s,background .2s}
+  .item .qn{width:36px;height:36px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:900}
+  .item.ok{border-color:#19b37b;background:#ecfff6}
+  .item.no{border-color:var(--red);background:#fff0f3}
+  .item .txt{font-size:1.06rem}
+  .item .hint{font-size:.85rem;color:#5d6788;margin-top:4px}
+  .item .fix{display:none;font-size:.9rem;font-weight:800;color:var(--ok);margin-top:4px}
+  .item.no .fix,.item.reveal .fix{display:block}
+  input.blank{font:inherit;font-weight:700;color:var(--purple);border:0;border-bottom:3px solid var(--purple);background:transparent;width:150px;max-width:100%;padding:0 4px;text-align:center;outline:none}
+  input.blank:focus{background:#f4edff;border-radius:6px 6px 0 0}
+  .item.ok input.blank{color:var(--ok);border-color:var(--ok)}
+  .item.no input.blank{color:var(--red);border-color:var(--red)}
+  .pick{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:middle}
+  .pick button{background:#fff;color:var(--ink);border:3px solid #d8def0;box-shadow:none;padding:2px 12px;font-size:1rem;border-radius:999px}
+  .pick button.right{border-color:#19b37b;background:#19b37b;color:#fff}
+  .pick button.wrong{border-color:var(--red);background:#ffe9ee;color:var(--red);text-decoration:line-through}
+  .pick button:disabled{cursor:default}
+  .bank{display:flex;flex-wrap:wrap;gap:6px;background:#fffbe6;border:3px dashed var(--yellow);border-radius:16px;padding:10px 12px;margin-bottom:14px}
+  .bank b{width:100%;font-size:.85rem}
+  .bank span{background:#fff;border-radius:999px;padding:2px 10px;font-weight:700;font-size:.9rem;border:2px solid #f3e3a0;cursor:pointer}
+  .bank span:hover{background:var(--yellow)}
+  .phrase b{background:#fff0c2;padding:0 4px;border-radius:5px}
+  .fact{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#eaf7ff,#f4edff);border-radius:18px;padding:12px 16px;margin:0 0 16px}
+  .fact .ic{font-size:2.2rem}
+  /* answer key */
+  .keygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .key{border-radius:18px;background:#fafbff;border:3px solid var(--c);padding:14px}
+  .key h3{color:var(--c);font-size:1.15rem}
+  .key ol{margin:0;padding-left:28px;columns:2;column-gap:18px;font-weight:700}
+  .key ol li{break-inside:avoid;padding:1px 0}
+  .key ol li span{font-weight:400;color:#5d6788;font-size:.85rem}
+  .keylock{text-align:center;padding:20px}
+  .keylock button{background:var(--navy)}
+  #keyBody{display:none} #keyBody.open{display:block}
+  /* final */
+  .final{text-align:center;background:linear-gradient(135deg,var(--yellow),var(--orange));color:var(--navy);border-radius:22px;padding:20px;margin-top:18px}
+  .stars{font-size:2.2rem;letter-spacing:4px}
+  .confetti{position:fixed;top:-20px;width:10px;height:16px;z-index:99;pointer-events:none;animation:fall linear forwards}
+  @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+  @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+  .pop{animation:pop .35s}
+  footer{text-align:center;padding:20px;color:#6b7390;font-size:.9rem}
+  @media (max-width:600px){
+    body{font-size:16px}
+    section{padding:16px}
+    .item{grid-template-columns:32px 1fr;padding:10px}
+    .item .qn{width:30px;height:30px;font-size:.9rem}
+    .key ol{columns:1}
+    nav{position:static}
+    .result{margin-left:0;width:100%}
+  }
+  @media print{
+    nav,.toolbar,.filters,.keylock{display:none!important}
+    body{background:#fff;font-size:13px} #keyBody{display:block!important}
+    section{box-shadow:none;break-inside:avoid-page;border:1px solid #ddd}
+    .card{height:auto}.inner{transform:none!important}.back{position:static;transform:none}.front{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="bubbles"><span style="width:90px;height:90px;left:-20px;top:20px"></span><span style="width:60px;height:60px;right:30px;top:-10px"></span><span style="width:130px;height:130px;right:-30px;bottom:-40px"></span><span style="width:50px;height:50px;left:30%;bottom:-15px"></span></div>
+    <span class="badge">UNIT 4 · pages 52–58</span>
+    <h1>Vocabulary Unit 4 📚✨</h1>
+    <p>20 powerful words · 5 practice activities · full answer key</p>
+    <div class="chips" id="heroChips"></div>
+  </header>
+
+  <nav>
+    <a href="#words">🃏 Words</a>
+    <a href="#say">🗣️ Say It</a>
+    <a href="#defs">✏️ Definitions</a>
+    <a href="#choose">🎯 Right Word</a>
+    <a href="#syn">🤝 Synonyms</a>
+    <a href="#ant">🔄 Antonyms</a>
+    <a href="#complete">🧩 Sentences</a>
+    <a href="#key">🔑 Answer Key</a>
+  </nav>
+
+  <section style="--c:var(--yellow)">
+    <div class="shead"><h2>🏆 My Progress</h2><button class="b-reset" onclick="resetAll()">Start over</button></div>
+    <p class="muted" style="margin:0">Check each activity to fill your bars. Get them all to unlock the trophy!</p>
+    <div class="board" id="board"></div>
+    <div id="finalBox"></div>
+  </section>
+
+  <!-- WORDS -->
+  <section id="words" style="--c:var(--pink)">
+    <div class="shead"><h2>🃏 Meet the Words</h2><span class="pg">Definitions · pp. 52–54</span></div>
+    <p class="instr">Tap a card to flip it. Read the easy meaning first, then the book definition, synonyms and antonyms.</p>
+    <div class="filters" id="filters"></div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <!-- PRONUNCIATION -->
+  <section id="say" style="--c:var(--purple)">
+    <div class="shead"><h2>🗣️ Say It Right!</h2><span class="pg">pronunciation guide</span></div>
+    <p class="instr">Read the sound-it-out spelling. The part in <b>CAPITALS</b> is the stressed part — say it louder and longer. Tap 🔊 to hear the word.</p>
+    <div class="saylist" id="sayList"></div>
+  </section>
+
+  <!-- DEFINITIONS -->
+  <section id="defs" style="--c:var(--orange)">
+    <div class="shead"><h2>✏️ Definitions: Fill the Blank</h2><span class="pg">pp. 52–54</span></div>
+    <p class="instr">Write the unit word in the blank in each illustrative sentence. You may need to change its form (for example, add <b>-s</b> or <b>-ed</b>).</p>
+    <div class="items" id="defItems"></div>
+    <div class="toolbar" data-set="defs"></div>
+  </section>
+
+  <!-- CHOOSING -->
+  <section id="choose" style="--c:var(--green)">
+    <div class="shead"><h2>🎯 Choosing the Right Word</h2><span class="pg">pp. 55–56</span></div>
+    <p class="instr">Select the <b>boldface</b> word that better completes each sentence. Tap your choice.</p>
+    <div class="fact"><div class="ic">🖋️</div><div><b>Did you know?</b> American poet Emily Dickinson wrote almost two thousand poems, but only about a dozen were published during her lifetime. (Sentence 1 is about her!)</div></div>
+    <div class="items" id="chooseItems"></div>
+    <div class="toolbar" data-set="choose"></div>
+  </section>
+
+  <!-- SYNONYMS -->
+  <section id="syn" style="--c:var(--blue)">
+    <div class="shead"><h2>🤝 Synonyms</h2><span class="pg">p. 56</span></div>
+    <p class="instr">Choose the word from this unit that is the same or most nearly the same in meaning as the <b>boldface</b> word or expression in the phrase.</p>
+    <div class="bank" id="synBank"></div>
+    <div class="items" id="synItems"></div>
+    <div class="toolbar" data-set="syn"></div>
+  </section>
+
+  <!-- ANTONYMS -->
+  <section id="ant" style="--c:var(--purple)">
+    <div class="shead"><h2>🔄 Antonyms</h2><span class="pg">p. 57</span></div>
+    <p class="instr">Choose the word from this unit that is most nearly <b>opposite</b> in meaning to the <b>boldface</b> word or expression in the phrase.</p>
+    <div class="bank" id="antBank"></div>
+    <div class="items" id="antItems"></div>
+    <div class="toolbar" data-set="ant"></div>
+  </section>
+
+  <!-- COMPLETING -->
+  <section id="complete" style="--c:var(--red)">
+    <div class="shead"><h2>🧩 Completing the Sentence</h2><span class="pg">pp. 57–58</span></div>
+    <p class="instr">From the words in this unit, choose the one that best completes each sentence. Write it in the space provided.</p>
+    <div class="bank" id="compBank"></div>
+    <div class="items" id="compItems"></div>
+    <div class="toolbar" data-set="complete"></div>
+  </section>
+
+  <!-- KEY -->
+  <section id="key" style="--c:var(--navy)">
+    <div class="shead"><h2>🔑 Teacher's Answer Key</h2><span class="pg">all of Unit 4</span></div>
+    <div class="keylock" id="keyLock">
+      <p class="muted">Students: try every activity first! 😉</p>
+      <button onclick="openKey()">Show answer key</button>
+    </div>
+    <div id="keyBody"><div class="keygrid" id="keyGrid"></div>
+      <div class="toolbar"><button onclick="window.print()" style="background:var(--navy)">🖨️ Print lesson + key</button></div>
+    </div>
+  </section>
+
+  <footer>Unit 4 Vocabulary · Grade 8 English · Miss Najat</footer>
+</div>
+
+<script>
+const COLORS=["#ff4f8b","#ff9f1c","#2ec4b6","#3a86ff","#8338ec","#ef476f","#1d2b53","#e07a00","#119c6b","#c2185b"];
+const W=[
+ {w:"annul",pr:"ə nəl′",p:"verb",e:"📜❌",easy:"to cancel something so it no longer counts",d:"to reduce to nothing; to make ineffective or inoperative; to declare legally invalid or void",syn:"cancel, abolish, invalidate, nullify",ant:"validate, authorize, ratify"},
+ {w:"blasé",pr:"blä zā′",p:"adjective",e:"😑",easy:"bored and not excited, because you have seen it all before",d:"indifferent, bored as a result of having enjoyed many pleasures; apathetic",syn:"",ant:"enthusiastic, passionate, fervent"},
+ {w:"bolster",pr:"bōl′ stər",p:"verb / noun",e:"💪",easy:"(v.) to support or make stronger; (n.) a long pillow",d:"(v.) to support, give a boost to; (n.) a long pillow or cushion; a supporting post",syn:"(v.) reinforce, buttress, validate",ant:"(v.) undermine, weaken, impair"},
+ {w:"deplore",pr:"di plôr′",p:"verb",e:"😤",easy:"to strongly disapprove of something or feel sorry about it",d:"to feel or express regret or disapproval",syn:"lament, bemoan, bewail",ant:"approve, commend, extol"},
+ {w:"frivolous",pr:"friv′ ə ləs",p:"adjective",e:"🎈",easy:"silly and not important; not serious",d:"of little importance, not worthy of serious attention; not meant seriously",syn:"silly, foolish, inane, petty",ant:"serious, important, significant"},
+ {w:"muster",pr:"məs′ tər",p:"verb / noun",e:"🎺",easy:"(v.) to gather people or courage; (n.) a gathering or roll call",d:"(v.) to bring together for service or battle; to gather or summon; to amount to, comprise, include; (n.) a list of military personnel; a gathering, accumulation",syn:"(v.) mobilize, marshal; (n.) roster, inventory",ant:"(v.) disband, dismiss, disperse"},
+ {w:"nonentity",pr:"nän en′ tə tē",p:"noun",e:"👤",easy:"a person or thing that seems not important at all",d:"a person or thing of no importance",syn:"nobody",ant:"celebrity"},
+ {w:"obsess",pr:"äb ses′",p:"verb",e:"🌀",easy:"to fill your mind so you can't stop thinking about it",d:"to trouble, haunt, or fill the mind",syn:"preoccupy",ant:""},
+ {w:"ornate",pr:"ôr nāt′",p:"adjective",e:"🖼️",easy:"full of fancy decoration",d:"elaborately decorated; showily splendid",syn:"fancy, flashy, flamboyant",ant:"plain, stark, austere"},
+ {w:"oust",pr:"aüst",p:"verb",e:"🚪",easy:"to force someone out of a job or place",d:"to remove, drive out of a position or place",syn:"expel, eject",ant:"admit, welcome"},
+ {w:"peruse",pr:"pə rüz′",p:"verb",e:"🔍",easy:"to read something slowly and carefully",d:"to read thoroughly and carefully",syn:"study, pore over, scrutinize",ant:""},
+ {w:"porous",pr:"pôr′ əs",p:"adjective",e:"🧽",easy:"full of tiny holes that let water or air through",d:"full of tiny holes; able to be penetrated by air or water",syn:"leaky, permeable",ant:"airtight, impermeable"},
+ {w:"promontory",pr:"präm′ ən tôr ē",p:"noun",e:"⛰️",easy:"high land that sticks out into the sea",d:"a high point of land extending into water",syn:"cliff, outcrop, jetty",ant:""},
+ {w:"prone",pr:"prōn",p:"adjective",e:"🛌",easy:"lying face down; OR likely to do or get something",d:"lying face down; inclined, likely",syn:"prostrate, liable",ant:"standing upright, unlikely"},
+ {w:"qualm",pr:"kwäm",p:"noun",e:"😟",easy:"a worried feeling that something may be wrong",d:"a pang of conscience, uneasiness, misgiving, or doubt; a feeling of faintness or nausea",syn:"regret, second thought, scruple",ant:""},
+ {w:"recourse",pr:"rē′ kôrs",p:"noun",e:"🆘",easy:"someone or something you turn to for help",d:"a person or thing turned to for help or advice; the act of seeking help or protection",syn:"redress, remedy",ant:""},
+ {w:"residue",pr:"rez′ ə dü",p:"noun",e:"🍯",easy:"what is left over after the rest is used or removed",d:"a remainder, that which remains when a part has been used up or removed",syn:"remnant, remains, leavings",ant:""},
+ {w:"solicitous",pr:"sə lis′ ət əs",p:"adjective",e:"🤲",easy:"showing care and concern for someone",d:"showing concern or care; fearful or anxious about someone or something",syn:"concerned",ant:"unconcerned, indifferent, apathetic"},
+ {w:"staid",pr:"stād",p:"adjective",e:"👔",easy:"serious, calm and a bit old-fashioned",d:"serious and dignified; quiet or subdued in character or conduct",syn:"sedate, sober, prim",ant:"gaudy, jaunty, unconventional"},
+ {w:"sustain",pr:"sə stān′",p:"verb",e:"🌱",easy:"to keep something going; to suffer (an injury)",d:"to support, nourish, keep up; to suffer, undergo; to bear up under, withstand; to affirm the validity of",syn:"foster, uphold",ant:""}
+];
+W.forEach((x,i)=>x.c=COLORS[i%COLORS.length]);
+/* easy "sound it out" spelling — CAPITALS = the stressed part */
+const SAY={annul:"uh-NUL",blasé:"blah-ZAY",bolster:"BOHL-ster",deplore:"dih-PLOR",frivolous:"FRIV-uh-lus",muster:"MUS-ter",nonentity:"non-EN-tih-tee",obsess:"ub-SES",ornate:"or-NAYT",oust:"OWST",peruse:"puh-ROOZ",porous:"POR-us",promontory:"PROM-un-tor-ee",prone:"PROHN",qualm:"KWAHM",recourse:"REE-kors",residue:"REZ-ih-doo",solicitous:"suh-LIS-ih-tus",staid:"STAYD",sustain:"suh-STAYN"};
+W.forEach(x=>x.say=SAY[x.w]);
+/* listen button — uses the browser's built-in English voice */
+let VOICE=null;
+function pickVoice(){const v=(window.speechSynthesis&&speechSynthesis.getVoices())||[];VOICE=v.find(x=>/en-US/i.test(x.lang)&&/natural|online|google|aria|jenny/i.test(x.name))||v.find(x=>/en-US/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))||null}
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function speak(word,btn,ev){
+  if(ev)ev.stopPropagation();
+  if(!window.speechSynthesis){alert("Sorry, this browser can't play sounds. Use the sound-it-out spelling.");return}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(word==="blasé"?"blah-zay":word);
+  u.lang="en-US";u.rate=.75;if(VOICE)u.voice=VOICE;
+  if(btn){btn.classList.add("on");u.onend=u.onerror=()=>btn.classList.remove("on")}
+  speechSynthesis.speak(u);
+}
+const WORDLIST=W.map(x=>x.w);
+
+/* ---------- answers (with accepted forms) ---------- */
+// "___" marks the blank. a = accepted answers (first one is shown in the key)
+const DEFS=[
+ ["The state legislators voted by an overwhelming majority to ___ the out-of-date law.",["annul"]],
+ ["Battle-hardened soldiers may tend to become a bit ___ about the dangers they face.",["blasé","blase"]],
+ ["When you write a research paper, you should always use appropriate facts to ___ your case.",["bolster"]],
+ ["The sofa has four comfortable ___.",["bolsters"]],
+ ["Social critics ___ what they believe is a widespread decline in good manners.",["deplore"]],
+ ["I'll ignore your ___ suggestion.",["frivolous"]],
+ ["You will need to ___ your courage to face the bully who has been tormenting you.",["muster"]],
+ ["The sleepy new recruits assembled on the parade ground for the early morning ___.",["muster"]],
+ ["We may not be movie stars, but we did not deserve to be treated as ___ by the presumptuous and haughty headwaiter.",["nonentities"]],
+ ["If you allow fear of failure to ___ you, you will find it difficult or even impossible to achieve your goals in life.",["obsess"]],
+ ["If you ask me, an ___ gilded frame distracts the viewer's eye from a simple drawing.",["ornate"]],
+ ["Military leaders ___ the duly elected president and took over the government.",["ousted"]],
+ ["It is wise to have a lawyer ___ an agreement before you sign it.",["peruse"]],
+ ["Some synthetic materials are as ___ and strong as natural sponges.",["porous"]],
+ ["We chose a high ___ overlooking the sea as the perfect spot for our picnic lunch.",["promontory"]],
+ ["Unfortunately, I am ___ to earaches and sinus infections.",["prone"]],
+ ["Don't you have serious ___ about voting for such a relatively unknown and inexperienced candidate?",["qualms"]],
+ ["If my letter of complaint fails to get results, I will still have ___ to a higher authority.",["recourse"]],
+ ["A ___ of sticky taffy made the pan difficult to clean.",["residue"]],
+ ["Neighbors made ___ inquiries about the state of the elderly couple's health.",["solicitous"]],
+ ["Many companies have a dress code which requires that employees wear ___ colors such as navy or gray.",["staid"]],
+ ["You may ___ a serious eye injury if you forget to wear your safety goggles when you work with chemicals or power tools.",["sustain"]]
+];
+const CHOOSE=[
+ ["Isn't it strange that a great American writer like Emily Dickinson was considered a ### in her own lifetime?",["nonentity","promontory"],0],
+ ["I admire the way Anne delivered a long, involved speech entirely without ### to written notes.",["muster","recourse"],1],
+ ["If you want to learn to play chess, I suggest that you begin by ### a summary of the rules.",["deploring","perusing"],1],
+ ["The team doctor ran onto the field toward the ### figure of the injured football player.",["prone","solicitous"],0],
+ ["The novelist is known for her ### writing style, using many unusual words, figures of speech, and involved constructions.",["staid","ornate"],1],
+ ["I think that talking loudly on the phone in public so that everyone knows about your private life is ### behavior.",["deplorable","blasé"],0],
+ ["When the mile run began, Ken quickly took the lead, but we knew that he could not ### that pace for the entire race.",["sustain","obsess"],0],
+ ["After the claims of all the creditors have been satisfied, the ### of the estate will be shared by the children.",["residue","qualms"],0],
+ ["My uncle is ### with football and spends all day Sunday watching every game on television.",["sustained","obsessed"],1],
+ ["I hope someday to build a house on that ### commanding a beautiful view of the bay.",["nonentity","promontory"],1],
+ ["Because they failed to deliver the goods on time, we felt justified in ### the entire contract.",["annulling","perusing"],0],
+ ["It is all very well to criticize and ### the mistakes of young people, but why don't you also give them credit for their good qualities?",["bolster","deplore"],1],
+ ["After months of rejection, Leah decided to hire a professional manager, hoping to ### her acting career.",["peruse","bolster"],1],
+ ["While my sister's memory is as retentive as a steel trap, mine seems to be as ### as a sieve.",["porous","blasé"],0],
+ ["The way the witness blushed and stuttered when questioned ### my suspicions that he was not telling the truth.",["ousted","bolstered"],1],
+ ["I would not call Lucy a friend, as she made no ### about sharing my secret with everyone!",["qualms","muster"],0],
+ ["My brother tried to appear ### when he was named to the honor society, but I know that he was thrilled.",["blasé","obsessed"],0],
+ ["I like jokes as much as anyone, but I don't approve of making such ### remarks when a serious matter is under discussion.",["frivolous","porous"],0],
+ ["We learned that behind the old professor's ### exterior there was a keen wit and a lively sense of what life is all about.",["ornate","staid"],1],
+ ["After being the apple of her eye for years, I suddenly found myself ### from her affections by an upstart rival.",["ousted","sustained"],0],
+ ["“It will take all the strength we can ### to dislodge the enemy from that hill,” the general observed grimly.",["annul","muster"],1],
+ ["Only a person who is ### with a desire to create beautiful music can become a great pianist or violinist.",["obsessed","bolstered"],0],
+ ["That wonderful woman could not have been more ### of me if she had been my own mother.",["solicitous","frivolous"],0],
+ ["I believed at the time that I was justified in refusing to help them, but later I felt some ### about it.",["qualms","recourse"],0],
+ ["Those who think recess is a ### activity do not see its purpose.",["staid","frivolous"],1]
+];
+const SYN=[
+ ["to be regarded as an <b>unknown</b>",["nonentity"]],
+ ["<b>apt</b> to take unnecessary chances",["prone"]],
+ ["resisted efforts to <b>overthrow</b> the monarchy",["oust"]],
+ ["made of a <b>penetrable</b> material",["porous"]],
+ ["settled the dispute without <b>resort</b> to the law",["recourse"]],
+ ["may <b>strengthen</b> your ability to resist colds",["bolster"]],
+ ["chose an <b>intricate</b> silverware pattern",["ornate"]],
+ ["scrubbed away the lime <b>deposit</b>",["residue"]],
+ ["special exercises to <b>maintain</b> muscle tone",["sustain"]],
+ ["the spectacular view from the <b>headland</b>",["promontory"]]
+];
+const ANT=[
+ ["the <b>entirety</b> of her mother's fortune",["residue"]],
+ ["sheep grazing in the <b>lowlands</b>",["promontory","promontories"]],
+ ["an <b>unadorned</b> evening gown",["ornate"]],
+ ["designing a slick, <b>waterproof</b> fabric",["porous"]],
+ ["a room crowded with <b>media superstars</b>",["nonentities"]]
+];
+const COMP=[
+ ["When we heard about our teacher's serious illness, we visited him daily in the hospital to ___ his morale.",["bolster","sustain"]],
+ ["The furnishings in their house are so ___ that the place looks more like a museum than a family home.",["ornate"]],
+ ["It is now time for you to take your work seriously and to give up some of the ___ activities of your earlier years.",["frivolous"]],
+ ["When we tried to carry water from the well, we found to our dismay that the bottom of the old bucket was ___.",["porous"]],
+ ["Her public statements became so embarrassing that club members tried to ___ her from the presidency.",["oust"]],
+ ["Every able-bodied citizen will be ___ into active military service to fight off the invading force.",["mustered"]],
+ ["“In that barren wasteland,” the explorer said, “we had great difficulty finding enough food to ___ life.”",["sustain"]],
+ ["After many years on stage, the enthusiasm I first felt for acting has deteriorated into a ___ attitude and boredom.",["blasé","blase"]],
+ ["I do not criticize people for trying to get ahead, but I ___ any attempt to take unfair advantage of others.",["deplore"]],
+ ["There I was—an utter ___ in a group of famous and accomplished persons!",["nonentity"]],
+ ["Some people seem to have no ___ about manipulating others to gain their own ends.",["qualms"]],
+ ["A lighthouse was built on the tip of the ___, where it served as a beacon for ships many miles away.",["promontory"]],
+ ["Because the villagers have so few dealings with the outside world, they are ___ to regard strangers with deep mistrust.",["prone"]],
+ ["She is the kind of ___ teacher who aids and encourages her students in every way she can.",["solicitous"]],
+ ["If you feel that you have been cheated, your only ___ is to make a complaint to the department of consumer affairs in your city.",["recourse"]],
+ ["Do not ___ about small details in your first draft of the essay, but address them in your revision.",["obsess"]],
+ ["Certain saltlike chemicals may effectively prevent the streets from icing up in winter, but the powdery ___ they leave behind can damage footwear.",["residue"]],
+ ["I will not allow a single act of carelessness to ___ the results of years of hard work.",["annul"]],
+ ["You should ___ the instructions with great care before you fill out your application for admission.",["peruse"]],
+ ["The quiet and ___ appearance of the library's reading room assured me that here I would be able to work in peace.",["staid"]]
+];
+
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+const norm=s=>s.trim().toLowerCase().replace(/[’']/g,"'").normalize("NFD").replace(/[̀-ͯ]/g,"");
+const LS="unit4vocab-v1";
+let store={};try{store=JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem(LS,JSON.stringify(store))}catch(e){}};
+const SETS={defs:{name:"Definitions",n:DEFS.length,icon:"✏️"},choose:{name:"Right Word",n:CHOOSE.length,icon:"🎯"},syn:{name:"Synonyms",n:SYN.length,icon:"🤝"},ant:{name:"Antonyms",n:ANT.length,icon:"🔄"},complete:{name:"Sentences",n:COMP.length,icon:"🧩"}};
+const score={defs:0,choose:0,syn:0,ant:0,complete:0};
+
+$("heroChips").innerHTML=W.map(x=>`<span>${x.w}</span>`).join("");
+
+/* ---------- word cards ---------- */
+const POS=["all","verb","noun","adjective"];
+$("filters").innerHTML=POS.map((p,i)=>`<button class="${i?"":"on"}" data-p="${p}">${p==="all"?"All 20":p[0].toUpperCase()+p.slice(1)+"s"}</button>`).join("")+`<button data-flip="1">🔄 Flip all</button>`;
+function renderCards(f){
+  $("cards").innerHTML=W.map((x,i)=>({x,i})).filter(o=>f==="all"||o.x.p.includes(f)).map(({x,i})=>`
+  <div class="card" style="--c:${x.c}" onclick="this.classList.toggle('flip')">
+    <div class="inner">
+      <div class="face front"><span class="no">${i+1}</span><div class="emo">${x.e}</div><div class="w">${x.w}</div><div class="pr">(${x.pr})</div><span class="say">🗣️ ${x.say}</span><button class="spk" onclick="speak('${x.w}',this,event)">🔊 Listen</button><span class="pos">${x.p}</span><span class="tap">tap to flip ↻</span></div>
+      <div class="face back"><h4>${i+1}. ${x.w} <small style="font-weight:600;color:#5d6788">(${x.p})</small></h4>
+        <button class="spk" onclick="speak('${x.w}',this,event)">🔊 ${x.say}</button>
+        <div class="easy">💡 ${x.easy}</div>
+        <div class="book">📖 ${x.d}</div>
+        <div class="sa">${x.syn?`<span class="s">SYN:</span> ${x.syn}<br>`:""}${x.ant?`<span class="a">ANT:</span> ${x.ant}`:""}</div>
+      </div>
+    </div>
+  </div>`).join("");
+}
+renderCards("all");
+$("sayList").innerHTML=W.map((x,i)=>`<div><span style="flex:1"><b>${i+1}. ${x.w}</b><br>${x.say}</span><button onclick="speak('${x.w}',this)">🔊</button></div>`).join("");
+$("filters").addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.flip){const c=[...document.querySelectorAll(".card")];const anyFront=c.some(x=>!x.classList.contains("flip"));c.forEach(x=>x.classList.toggle("flip",anyFront));return}
+  document.querySelectorAll("#filters button[data-p]").forEach(x=>x.classList.toggle("on",x===b));renderCards(b.dataset.p);
+});
+
+/* ---------- typed sets ---------- */
+function blankHTML(set,i){return `<input class="blank" data-set="${set}" data-i="${i}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="answer ${i+1}">`}
+function renderTyped(set,data,el,phrase){
+  $(el).innerHTML=data.map((d,i)=>`
+   <div class="item" id="${set}-${i}"><div class="qn">${i+1}</div><div>
+     <div class="txt ${phrase?"phrase":""}">${phrase?`${d[0]} → ${blankHTML(set,i)}`:d[0].replace("___",blankHTML(set,i))}</div>
+     <div class="fix">✔ ${d[1][0]}</div></div></div>`).join("");
+}
+renderTyped("defs",DEFS,"defItems");
+renderTyped("syn",SYN,"synItems",true);
+renderTyped("ant",ANT,"antItems",true);
+renderTyped("complete",COMP,"compItems");
+const bankHTML=`<b>Word bank — tap a word to drop it into the box you're on:</b>`+WORDLIST.map(w=>`<span>${w}</span>`).join("");
+["synBank","antBank","compBank"].forEach(id=>$(id).innerHTML=bankHTML);
+let lastInput=null;
+document.addEventListener("focusin",e=>{if(e.target.matches("input.blank"))lastInput=e.target});
+document.querySelectorAll(".bank").forEach(b=>b.addEventListener("click",e=>{
+  const s=e.target.closest("span");if(!s)return;
+  const sec=b.closest("section");let inp=lastInput&&sec.contains(lastInput)?lastInput:[...sec.querySelectorAll("input.blank")].find(x=>!x.value);
+  if(!inp)return;inp.value=s.textContent;inp.dispatchEvent(new Event("input",{bubbles:true}));
+  const all=[...sec.querySelectorAll("input.blank")];const nx=all.slice(all.indexOf(inp)+1).find(x=>!x.value);(nx||inp).focus();
+}));
+document.addEventListener("input",e=>{
+  if(!e.target.matches("input.blank"))return;
+  const {set,i}=e.target.dataset;(store[set]=store[set]||{})[i]=e.target.value;save();
+  e.target.closest(".item").classList.remove("ok","no","reveal");
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&e.target.matches("input.blank")){const all=[...e.target.closest("section").querySelectorAll("input.blank")];const nx=all[all.indexOf(e.target)+1];if(nx)nx.focus();else checkSet(e.target.dataset.set)}
+});
+const DATA={defs:DEFS,syn:SYN,ant:ANT,complete:COMP};
+function checkSet(set){
+  if(set==="choose")return;
+  let c=0;
+  DATA[set].forEach((d,i)=>{
+    const it=$(`${set}-${i}`),v=norm(it.querySelector("input").value);
+    it.classList.remove("ok","no","reveal");
+    if(!v)return;
+    const ok=d[1].some(a=>norm(a)===v);
+    it.classList.add(ok?"ok":"no");if(ok)c++;
+  });
+  setScore(set,c);
+}
+function showSet(set){
+  if(set==="choose"){CHOOSE.forEach((d,i)=>{const it=$(`choose-${i}`);if(!it.dataset.done)answerChoose(i,d[2],true)});return}
+  DATA[set].forEach((d,i)=>{const it=$(`${set}-${i}`);if(!it.classList.contains("ok"))it.classList.add("reveal")});
+}
+function resetSet(set,silent){
+  if(set==="choose"){store.choose={};renderChoose();}
+  else{store[set]={};document.querySelectorAll(`input.blank[data-set="${set}"]`).forEach(x=>{x.value="";x.closest(".item").classList.remove("ok","no","reveal")})}
+  save();setScore(set,0);
+}
+document.querySelectorAll(".toolbar[data-set]").forEach(t=>{
+  const s=t.dataset.set;
+  t.innerHTML=(s==="choose"?"":`<button class="b-check" onclick="checkSet('${s}')">✅ Check</button>`)+
+   `<button class="b-show" onclick="showSet('${s}')">👀 Show answers</button><button class="b-reset" onclick="resetSet('${s}')">↺ Reset</button><span class="result" id="res-${s}"></span>`;
+});
+
+/* ---------- choosing set ---------- */
+function renderChoose(){
+  $("chooseItems").innerHTML=CHOOSE.map((d,i)=>`
+   <div class="item" id="choose-${i}"><div class="qn">${i+1}</div><div class="txt">${d[0].replace("###",`(<span class="pick">${d[1].map((o,k)=>`<button onclick="answerChoose(${i},${k})">${o}</button>`).join("")}</span>)`)}</div></div>`).join("");
+}
+renderChoose();
+function answerChoose(i,k,reveal){
+  const it=$(`choose-${i}`);if(it.dataset.done)return;it.dataset.done=1;
+  const d=CHOOSE[i],bs=it.querySelectorAll(".pick button");
+  bs.forEach((b,j)=>{b.disabled=true;if(j===d[2])b.classList.add("right");else if(j===k&&!reveal)b.classList.add("wrong")});
+  if(!reveal){it.classList.add(k===d[2]?"ok":"no");(store.choose=store.choose||{})[i]=k;save()}
+  setScore("choose",CHOOSE.filter((d,j)=>store.choose&&store.choose[j]===d[2]).length);
+}
+
+/* ---------- scoring ---------- */
+function setScore(set,c){
+  score[set]=c;const n=SETS[set].n;
+  const r=$(`res-${set}`);if(r){r.textContent=c?`⭐ ${c} / ${n}`:"";r.classList.remove("pop");void r.offsetWidth;r.classList.add("pop")}
+  if(c===n)confetti();
+  drawBoard();
+}
+function drawBoard(){
+  $("board").innerHTML=Object.entries(SETS).map(([k,s])=>`<div class="tile-s"><b>${s.icon} ${s.name}</b><span class="n">${score[k]}/${s.n}</span><div class="bar"><div style="width:${score[k]/s.n*100}%"></div></div></div>`).join("");
+  const tot=Object.values(score).reduce((a,b)=>a+b,0),max=Object.values(SETS).reduce((a,s)=>a+s.n,0);
+  const pct=tot/max;
+  $("finalBox").innerHTML=tot?`<div class="final"><div class="stars">${"⭐".repeat(Math.max(1,Math.round(pct*5)))}${"☆".repeat(5-Math.max(1,Math.round(pct*5)))}</div><b style="font-size:1.3rem">${tot} / ${max} correct</b><div>${pct===1?"🏆 PERFECT! You are a Unit 4 word master!":pct>=.8?"Amazing work — almost there! 🚀":pct>=.5?"Great progress — keep going! 💪":"Good start — flip the cards and try again! 🌱"}</div></div>`:"";
+}
+function resetAll(){Object.keys(SETS).forEach(s=>resetSet(s,true));document.querySelectorAll(".card").forEach(c=>c.classList.remove("flip"));scrollTo({top:0})}
+function confetti(){
+  const cs=["#ff4f8b","#ff9f1c","#ffd23f","#2ec4b6","#3a86ff","#8338ec"];
+  for(let i=0;i<70;i++){const d=document.createElement("div");d.className="confetti";d.style.left=Math.random()*100+"vw";d.style.background=cs[i%cs.length];d.style.animationDuration=(1.6+Math.random()*1.6)+"s";d.style.animationDelay=Math.random()*.4+"s";document.body.appendChild(d);setTimeout(()=>d.remove(),3800)}
+}
+
+/* ---------- restore saved work ---------- */
+["defs","syn","ant","complete"].forEach(s=>{const v=store[s]||{};Object.entries(v).forEach(([i,val])=>{const inp=document.querySelector(`input.blank[data-set="${s}"][data-i="${i}"]`);if(inp)inp.value=val});if(Object.keys(v).length)checkSet(s)});
+if(store.choose){const saved={...store.choose};Object.entries(saved).forEach(([i,k])=>answerChoose(+i,k))}
+drawBoard();
+Object.keys(SETS).forEach(s=>{const r=$(`res-${s}`);if(r)r.classList.remove("pop")});
+
+/* ---------- answer key ---------- */
+const keyCols=[
+ ["✏️ Definitions (sentence blanks)","#ff9f1c",DEFS.map(d=>d[1][0])],
+ ["🎯 Choosing the Right Word","#2ec4b6",CHOOSE.map(d=>d[1][d[2]])],
+ ["🤝 Synonyms","#3a86ff",SYN.map(d=>d[1][0])],
+ ["🔄 Antonyms","#8338ec",ANT.map(d=>d[1][0])],
+ ["🧩 Completing the Sentence","#ef476f",COMP.map(d=>d[1].join(" / "))]
+];
+$("keyGrid").innerHTML=keyCols.map(([t,c,a])=>`<div class="key" style="--c:${c}"><h3>${t}</h3><ol>${a.map(x=>`<li>${x}</li>`).join("")}</ol></div>`).join("");
+function openKey(){$("keyBody").classList.add("open");$("keyLock").style.display="none"}
+</script>
+</body>
+</html>
